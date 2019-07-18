@@ -1,0 +1,150 @@
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+
+struct Cadastro{
+    
+    char nome[50];
+    char email[50];
+    char data[10];
+    char tipo[20];
+    int potrona;
+    
+};
+
+int main()
+{
+    int salao[5][10];
+    int opcao, c, f, aux1, aux2;
+    int assento_e = 0; // 0 vazio, 1 full
+    char cad[10];
+    
+    
+    for ( f=0; f<6; f++ )
+    {
+        for ( c=0; c<11; c++ )
+        {
+           salao[f][c] = 0;
+        }
+    }
+    
+    int count =0;
+    int max =50;
+    int min = 1 ;
+    int resul;
+    
+    for (count =0 ; count < 6 ; count++)
+    {
+        printf("1 - Cadastro professor e convidados\n");
+        printf("2 - Cadastro publico geral\n");
+        printf("3 - Relatorio e-mail\n");
+        printf("4 - Sorteio\n");
+      
+        scanf("%d", &opcao);
+        aux1 = 0;
+        aux2 = 20;
+    
+        struct Cadastro cad[50];
+    
+        switch (opcao)
+        {
+            case 1:
+                for ( f=0; f<2; f++ )
+                {
+                    for ( c=0; c<10; c++ )
+                    {
+                        aux1 ++;
+                        
+                        if ( salao[f][c] == 0)
+                        {
+                            salao[f][c] = 1;
+                            
+                            
+                            printf("Cadastre o nome, separando o nome e sobrenome com '_', e-mail y data. \n");
+                            scanf("%s %s %s",cad[aux1].nome,cad[aux1].email,cad[aux1].data);
+         
+                            strcpy(cad[aux1].tipo, "Convidado");
+                            cad[aux1].potrona = aux1;
+                            
+                            printf("   Tiquete \n");
+                            printf("   Nome: %s \n",cad[aux1].nome);
+                            printf("   E-mail: %s \n",cad[aux1].email);
+                            printf("   Data: %s \n",cad[aux1].data);
+                            printf("   Tipo convidado: %s \n",cad[aux1].tipo);
+                            printf("   Numero da poltrana: %d \n",cad[aux1].potrona);
+                            getch(); 
+                            
+                            f=2;
+                            c=10;
+                        }
+                    }
+                }
+                
+                if (salao[1][9] == 1)
+                {
+                    printf("lugar esgotado");
+                }
+            break;
+            
+            case 2:
+                for ( f=3; f<6; f++ )
+                {
+                    for ( c=0; c<10; c++ )
+                    {
+                        aux2 ++;
+                        
+                        if ( salao[f][c] == 0)
+                        {
+                            salao[f][c] = 1;
+                            
+                            
+                            printf("Cadastre o nome, e-mail y data. \n");
+                            scanf("%s %s %s",cad[aux2].nome,cad[aux2].email,cad[aux2].data);
+         
+                            strcpy(cad[aux2].tipo, "Publico Geral");
+                            cad[aux2].potrona = aux2;
+                            
+                            printf("   Tiquete \n");
+                            printf("   Nome: %s \n",cad[aux2].nome);
+                            printf("   E-mail: %s \n",cad[aux2].email);
+                            printf("   Data: %s \n",cad[aux2].data);
+                            printf("   Tipo convidado: %s \n",cad[aux2].tipo);
+                            printf("   Numero da poltrana: %d \n",cad[aux2].potrona);
+                            getch(); 
+                            
+                            f=5;
+                            c=10;
+                        }
+                    }
+                }
+                
+                if (salao[1][9] == 1)
+                {
+                    printf("lugar esgotado");
+                }
+                break;
+            
+            case 3: 
+            
+                printf("Relatório de e-mail: \n ");
+                for ( f=1; f<51; f++ )
+                {
+                    if ( strlen(cad[f].email) > 0)
+                        printf("%d) %s \n ",f , cad[f].email );
+                }
+                break;
+            
+            case 4:
+                resul = 0;
+                
+                srand(time(NULL));
+                
+                resul = ((rand() % (int)(((max) + 1) - (min))) + (min));
+                
+                printf("Número ganhador do sorteio:  %d !!!! \n", resul );
+
+                break;
+        }
+    //fim contagem 50 
+    }
+}
